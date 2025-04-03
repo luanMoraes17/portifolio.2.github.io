@@ -11,9 +11,10 @@
 
 /* Reset e estilos gerais */
 body {
-  padding-top: 56px;
   font-family: "Roboto", sans-serif;
   background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
 }
 
 /* Hero Section melhorada */
@@ -101,6 +102,7 @@ body {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -124,6 +126,7 @@ body {
 
 /* Navbar Melhorado */
 .navbar {
+  position: relative; /* Altere de fixed para relative */
   background-color: rgba(26, 26, 26, 0.98) !important;
   padding: 1rem 2rem;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
@@ -220,20 +223,29 @@ body {
 }
 
 .navbar-toggler-icon {
-  width: 24px;
-  height: 24px;
-
+  display: inline-block;
+  width: 30px;
+  height: 3px;
+  background-color: var(--light-color);
   position: relative;
 }
 
 .navbar-toggler-icon::before,
 .navbar-toggler-icon::after {
-  content: none;
+  content: "";
   position: absolute;
-  width: 24px;
-  height: 2px;
+  width: 30px;
+  height: 3px;
   background-color: var(--light-color);
   transition: var(--transition);
+}
+
+.navbar-toggler-icon::before {
+  top: -8px;
+}
+
+.navbar-toggler-icon::after {
+  top: 8px;
 }
 
 /* Animações */
