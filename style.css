@@ -21,12 +21,12 @@ body {
 .hero-section {
   background: linear-gradient(
     135deg,
-    var(--primary-color),
-    var(--secondary-color)
+    var(--cor-primaria),
+    var(--cor-secundaria)
   );
-  color: var(--light-color);
+  color: var(--cor-clara);
   padding: 120px 0;
-  margin-bottom: 30px;
+  margin-top: 76px; /* Adicionar margem superior */
   position: relative;
   overflow: hidden;
 }
@@ -223,21 +223,12 @@ body {
 }
 
 .navbar-toggler-icon {
-  display: inline-block;
-  width: 30px;
-  height: 3px;
-  background-color: var(--light-color);
-  position: relative;
+  background-color: #333333;  /* Cor mais escura para melhor contraste */
 }
 
 .navbar-toggler-icon::before,
 .navbar-toggler-icon::after {
-  content: "";
-  position: absolute;
-  width: 30px;
-  height: 3px;
-  background-color: var(--light-color);
-  transition: var(--transition);
+  background-color: #333333;
 }
 
 .navbar-toggler-icon::before {
