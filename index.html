@@ -1,138 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luan Moraes - Portfólio</title>
-    <link rel="shortcut icon" href="assets/image/lg.png" type="image/png">
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <link href="style.css" rel="stylesheet" />
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">LM</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-          
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <i class="fas fa-user"></i>
-                Sobre Mim
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="conhecimentos.html">
-                <i class="fas fa-brain"></i>
-                Conhecimentos
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="projetos.html">
-                <i class="fas fa-code"></i>
-                Projetos
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="certificados.html">
-                <i class="fas fa-certificate"></i>
-                Certificados
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contato.html">
-                <i class="fas fa-envelope"></i>
-                Contato
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <link rel="stylesheet" href="estilo.css">
+    <meta name="author" content="Luan Moraes">
+    <meta name="description" content="Portfólio de Luan Moraes">
+    
+</head>
 
-    <!-- Hero Section -->
-    <section class="hero-section text-center">
-      <div class="container">
-        <div class="profile-img-container mb-4">
-          <img src="ln.JPG" alt="Foto de Luan Moraes" class="profile-img" />
+<body>
+    <!-- Cabeçalho com navegação -->
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">LM</a>
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="menu-btn">
+                <span></span>
+            </label>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Sobre Mim</a></li>
+                    <li><a href="conhecimentos.html">Conhecimentos</a></li>
+                    <li><a href="projetos.html">Projetos</a></li>
+                    <li><a href="formacao.html">Formação</a></li>
+                    <li><a href="certificados.html">Certificados</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
         </div>
-        <h1 class="display-4 fw-bold">Luan Moraes</h1>
-        <p class="lead">Desenvolvedor Full Stack</p>
-      </div>
-    </section>
+    </header>
 
-    <!-- Sobre Section -->
-    <section id="sobre" class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <h2 class="text-center mb-4">Sobre Mim</h2>
-            <div class="card shadow-sm">
-              <div class="card-body">
-                <div class="card-text">
-                    <p>Olá, sou técnico de enfermagem em transição de carreira para a área de tecnologia.</p>
-                    <p>Possuo certificações em HTML, CSS, JavaScript, Python, Java, Git/GitHub e Banco de Dados SQL.</p>
-                    <p>Ao longo da minha trajetória, desenvolvi projetos que englobam automação de tarefas, desenvolvimento front-end e back-end, e manipulação de dados, sempre focando em criar soluções eficientes e inovadoras.</p>
-                    <p>Estou em busca de uma oportunidade como Desenvolvedor Júnior para aplicar minhas habilidades técnicas, resolver problemas de forma criativa e contribuir para o sucesso da equipe, enquanto continuo crescendo e me aprimorando como profissional.</p>
-                    <p>Sou um profissional detalhista, capaz de abordar projetos complexos com uma visão estratégica e analítica. Minha habilidade em compreender as necessidades das pessoas e liderar projetos com base nessa percepção tem sido essencial para alcançar resultados positivos. </p>
-                </div>
-              </div>
+    <!-- Seção principal com foto e apresentação -->
+    <section class="hero">
+        <div class="container">
+            <div class="perfil-container">
+                <img src="imagens/ln.JPG" alt="Foto de Luan Moraes" class="perfil-img">
             </div>
-          </div>
+            <h1>Luan Moraes</h1>
+            <p class="subtitulo">Desenvolvedor Full Stack</p>
         </div>
-      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-      <div class="container">
-        <p class="mb-0">Desenvolvido por Luan Moraes &copy; 2025</p>
-      </div>
+    <!-- Seção sobre mim -->
+    <section id="sobre" class="secao-padrao">
+        <div class="container">
+            <h2>Sobre Mim</h2>
+            <div class="card">
+                <div class="card-conteudo">
+                    <!-- Texto sobre mim -->
+                    <p class="intro-text">Olá! Sou técnico de enfermagem em <strong>transição de carreira</strong> para a área de tecnologia, movido pelo desejo de transformar ideias em soluções digitais.</p>
+                    
+                    <p>Possuo certificações em <span class="highlight">HTML</span>,  <span class="highlight">CSS</span>, <span class="highlight">JavaScript</span>, <span class="highlight">Python</span>, <span class="highlight">Java</span>, <span class="highlight">Git/GitHub</span> e <span class="highlight">Banco de Dados</span>. Venho desenvolvendo projetos que englobam:</p>
+                    
+                    <ul class="skills-list">
+                        <li>Automação de tarefas</li>
+                        <li>Desenvolvimento front-end e back-end</li>
+                        <li>Manipulação de dados</li>
+                    </ul>
+                    
+                    <p>Estou em busca de uma oportunidade como <strong>Desenvolvedor</strong>, onde possa aplicar minhas habilidades técnicas, resolver problemas de forma criativa e contribuir com o crescimento da equipe enquanto evoluo como profissional na área.</p>
+                    
+                    <p class="personal-traits">Sou uma pessoa analítica, com atenção aos detalhes e foco em resultados. Tenho facilidade em entender as necessidades das pessoas e transformar essas demandas em soluções eficientes, sempre com uma visão estratégica e colaborativa.</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé da página -->
+    <footer>
+        <div class="container">
+            <p>Desenvolvido por Luan Moraes &copy; 2025</p>
+        </div>
     </footer>
+</body>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      // Marcar link ativo no menu
-      document.addEventListener("DOMContentLoaded", function () {
-        const currentPage = window.location.pathname;
-        const navLinks = document.querySelectorAll(".nav-link");
-
-        navLinks.forEach((link) => {
-          if (link.getAttribute("href") === currentPage.split("/").pop()) {
-            link.classList.add("active");
-          }
-        });
-      });
-
-      // Efeito de scroll na navbar
-      window.addEventListener("scroll", function () {
-        const navbar = document.querySelector(".navbar");
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
-        } else {
-          navbar.classList.remove("scrolled");
-        }
-      });
-    </script>
-  </body>
 </html>

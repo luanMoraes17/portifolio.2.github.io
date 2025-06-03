@@ -1,0 +1,891 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Sistema de cores ...
+   Isso facilita muito a manutenção - se quiser mudar uma cor,
+   só precisa alterar aqui e afeta todo o site!  */
+:root {
+    --cor-primaria: #007bff;    /* Azul principal usado em destaques */
+    --cor-secundaria: #6610f2;  /* Roxo usado em gradientes e efeitos */
+    --cor-destaque: #ffc107;    /* Amarelo para chamar atenção em elementos importantes */
+    --cor-escura: #1a1a1a;      /* Quase preto, usado em fundos e textos */
+    --cor-clara: #fff;          /* Branco para textos sobre fundos escuros */
+    --cor-cinza: #a0a0a0;       /* Cinza para textos secundários */
+    --cor-fundo: #f8f9fa;       /* Cinza bem claro para o fundo do site */
+    --sombra-padrao: 0 4px 15px rgba(0, 0, 0, 0.1);  /* Sombra sutil para cards e elementos */
+    --transicao: all 0.3s ease; /* Transição suave para hover e animações */
+}
+
+/* Configurações básicas do corpo da página */
+body {
+    font-family: 'Arial', sans-serif; /* Fonte comum que funciona em qualquer dispositivo */
+    background-color: var(--cor-fundo);
+    color: #333;
+    line-height: 1.6;  /* Espaçamento entre linhas para melhor leitura */
+    padding-top: 70px; /* Espaço para o cabeçalho fixo não cobrir o conteúdo */
+}
+
+/* Container responsivo - mantém o conteúdo centralizado e com largura máxima */
+.container {
+    width: 90%;         /* Usa 90% da largura disponível */
+    max-width: 1200px;  /* Mas nunca ultrapassa 1200px */
+    margin: 0 auto;     /* Centraliza horizontalmente */
+    padding: 0 15px;    /* Espaçamento interno para não colar nas bordas */
+}
+
+/* Cabeçalho fixo no topo da página */
+header {
+    background-color: var(--cor-escura);
+    color: var(--cor-clara);
+    padding: 1rem 0;
+    position: fixed;  /* Mantém o cabeçalho visível ao rolar a página */
+    width: 100%;
+    top: 0;
+    z-index: 1000;    /* Garante que fique acima de outros elementos */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra sutil para destacar do conteúdo */
+}
+
+/* Organiza logo e menu lado a lado */
+header .container {
+    display: flex;
+    justify-content: space-between; /* Logo à esquerda, menu à direita */
+    align-items: center;
+}
+
+/* Estilo do logo LM */
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--cor-clara);
+    text-decoration: none;
+    padding: 5px 10px;
+    position: relative; /* Necessário para o efeito de linha abaixo */
+}
+
+/* Efeito de linha animada sob o logo ao passar o mouse */
+.logo::after {
+    content: '';  
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cor-destaque), transparent); /* Gradiente que desaparece nas pontas */
+    transform: scaleX(0); /* Começa invisível (largura zero) */
+    transition: var(--transicao);
+}
+
+/* Quando passar o mouse, a linha aparece expandindo */
+.logo:hover::after {
+    transform: scaleX(1); /* Expande para largura total */
+}
+
+/* Menu de navegação */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav ul {
+    display: flex; /* Coloca os itens do menu lado a lado */
+    list-style: none;
+}
+
+nav li {
+    margin: 0 10px; /* Espaçamento entre os itens do menu */
+}
+
+nav a {
+    color: var(--cor-cinza); /* Cor mais suave para links não ativos */
+    text-decoration: none;
+    padding: 8px 0;
+    position: relative; /* Para o efeito de linha abaixo */
+    transition: var(--transicao);
+}
+
+/* Efeito de linha animada sob os links do menu */
+nav a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--cor-destaque);
+    transform: scaleX(0); /* Começa com largura zero */
+    transform-origin: right; /* A animação começa da direita */
+    transition: var(--transicao);
+}
+
+/* Quando passar o mouse ou link ativo, a linha aparece da esquerda para direita */
+nav a:hover::before,
+nav a.ativo::before {
+    transform: scaleX(1);
+    transform-origin: left; /* A animação vai da esquerda para direita */
+}
+
+/* Muda a cor do texto também ao passar o mouse */
+nav a:hover,
+nav a.ativo {
+    color: var(--cor-clara); /* Fica branco para destacar */
+}
+
+/* Checkbox escondido para controlar o menu mobile sem JavaScript */
+#menu-toggle {
+    display: none; /* Esconde visualmente, mas mantém funcional */
+}
+
+/* Botão do menu  (só aparece em telas pequenas) */
+.menu-btn {
+    display: none; /* Começa escondido e só aparece em telas pequenas */
+    cursor: pointer;
+    z-index: 1001; /* Fica acima do menu quando aberto */
+    width: 30px;
+    height: 21px;
+    position: relative;
+}
+
+/* Cria as três linhas do botão menu */
+.menu-btn span,
+.menu-btn span::before,
+.menu-btn span::after {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: var(--cor-clara);
+    border-radius: 3px;
+    transition: var(--transicao);
+}
+
+.menu-btn span {
+    top: 9px; /* Posiciona a linha do meio */
+}
+
+.menu-btn span::before {
+    content: '';
+    top: -9px; /* Linha superior */
+}
+
+.menu-btn span::after {
+    content: '';
+    top: 9px; /* Linha inferior */
+}
+
+/* Rodapé da página */
+footer {
+    background: linear-gradient(45deg, var(--cor-escura), #333); /* Gradiente sutil */
+    color: var(--cor-clara);
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 80px; /* Espaço entre o conteúdo e o rodapé */
+    position: relative; /* Para o efeito de linha acima */
+}
+
+/* Linha decorativa acima do rodapé */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cor-clara), transparent); /* Gradiente que desaparece nas pontas */
+    opacity: 0.1; /* Bem sutil */
+}
+
+/* Ajustes para telas menores (tablets) */
+@media (max-width: 992px) {
+    nav ul {
+        gap: 15px; /* Reduz o espaço entre itens do menu */
+    }
+    
+    nav li {
+        margin: 0; /* Remove margem adicional */
+    }
+}
+
+/* Ajustes para celulares e telas pequenas */
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px; /* Reduz o espaço para o cabeçalho menor */
+    }
+    
+    header {
+        padding: 0.8rem 0; /* Cabeçalho um pouco menor */
+    }
+    
+    /* Ativa o botão do menu mobile */
+    .menu-btn {
+        display: block;
+    }
+    
+    /* Transforma o menu horizontal em um painel lateral */
+    nav {
+        position: fixed;
+        top: 0;
+        right: -300px; /* Começa escondido fora da tela */
+        width: 250px;
+        height: 100vh; /* Ocupa toda a altura da tela */
+        background-color: var(--cor-escura);
+        flex-direction: column;
+        justify-content: center;
+        padding: 80px 0;
+        transition: right 0.3s ease; /* Animação de deslizar */
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Itens do menu em coluna em vez de linha */
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+    
+    nav li {
+        margin: 10px 0;
+        width: 100%;
+    }
+    
+    nav a {
+        display: block;
+        padding: 10px 0;
+    }
+    
+    /* Quando o checkbox está marcado, mostra o menu deslizando da direita */
+    #menu-toggle:checked ~ nav {
+        right: 0; /* Move para dentro da tela */
+    }
+    
+    /* Animação do botão hamburguer para X quando menu aberto */
+    #menu-toggle:checked ~ .menu-btn span {
+        background-color: transparent; /* A linha do meio desaparece */
+    }
+    
+    #menu-toggle:checked ~ .menu-btn span::before {
+        transform: rotate(45deg) translate(6px, 6px); /* Forma um lado do X */
+    }
+    
+    #menu-toggle:checked ~ .menu-btn span::after {
+        transform: rotate(-45deg) translate(6px, -6px); /* Forma o outro lado do X */
+    }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.5rem; /* Logo um pouco menor */
+    }
+    
+    h1 {
+        font-size: 1.8rem; /* Títulos menores */
+    }
+}
+
+.hero {
+    background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+    color: var(--cor-clara);
+    padding: 120px 0 80px;
+    margin-top: 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de gradiente sobre a seção hero */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.perfil-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid var(--cor-clara);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    transition: var(--transicao);
+    position: relative;
+    z-index: 1;
+}
+
+.perfil-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.4);
+}
+
+.perfil-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transicao);
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.subtitulo {
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Seções padrão */
+.secao-padrao {
+    padding: 80px 0;
+}
+
+/* Conteúdo principal */
+.conteudo {
+    padding: 120px 0 80px;
+}
+
+/* Títulos */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria));
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--cor-escura);
+}
+
+/* Cards */
+.card {
+    background: var(--cor-clara);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--sombra-padrao);
+    transition: var(--transicao);
+    margin-bottom: 30px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-conteudo {
+    padding: 1.5rem;
+}
+
+/* Grid de cards para conhecimentos */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Lista de conhecimentos */
+.lista-conhecimentos {
+    list-style: none;
+}
+
+.lista-conhecimentos li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.lista-conhecimentos li:last-child {
+    border-bottom: none;
+}
+
+/* Projetos */
+.projetos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.projeto {
+    display: flex;
+    flex-direction: column;
+    background: var(--cor-clara);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--sombra-padrao);
+    transition: var(--transicao);
+}
+
+.projeto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.projeto-imagem {
+    padding: 20px;
+}
+
+.projeto-imagem img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: var(--transicao);
+}
+
+.projeto:hover .projeto-imagem img {
+    transform: scale(1.03);
+}
+
+.projeto-info {
+    padding: 20px;
+}
+
+.projeto-info h3 {
+    margin-bottom: 15px;
+}
+
+.projeto-info p {
+    margin-bottom: 20px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.projeto-tecnologias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.projeto-tecnologias span {
+    background: rgba(0, 123, 255, 0.1);
+    color: var(--cor-primaria);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.projeto-links {
+    display: flex;
+    gap: 15px;
+}
+
+/* Para telas maiores, alterna o layout dos projetos */
+@media (min-width: 768px) {
+    .projeto {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .projeto-imagem {
+        flex: 1;
+    }
+    
+    .projeto-info {
+        flex: 1;
+    }
+    
+    .inverso {
+        flex-direction: row-reverse;
+    }
+}
+
+/* Certificados */
+.certificados-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.certificado-card {
+    background: var(--cor-clara);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--sombra-padrao);
+    transition: var(--transicao);
+}
+
+.certificado-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.certificado-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.certificado-card img {
+    width: 100%;
+    height: auto;
+    transition: var(--transicao);
+}
+
+.certificado-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.certificado-info h3 {
+    margin-bottom: 5px;
+}
+
+.certificado-info p {
+    color: var(--cor-cinza);
+    font-size: 0.9rem;
+}
+
+/* Formação */
+.formacao-container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.formacao-secao h2 {
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.formacao-secao h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria));
+}
+
+.instituicao, .periodo {
+    color: var(--cor-cinza);
+    margin-bottom: 5px;
+}
+
+.descricao {
+    margin-top: 10px;
+}
+
+/* Nível de idioma */
+.nivel-idioma {
+    margin: 15px 0;
+}
+
+.barra-nivel {
+    height: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+.nivel {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria));
+    border-radius: 5px;
+}
+
+/* Contato */
+.contato-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.contato-card {
+    background: var(--cor-clara);
+    border-radius: 15px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: var(--sombra-padrao);
+    transition: var(--transicao);
+}
+
+.contato-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.contato-icone {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--cor-clara);
+}
+
+/* Ícones de contato com cores específicas */
+.email-icone {
+    background: linear-gradient(45deg, #d44638, #ea4335);
+    position: relative;
+}
+
+.email-icone::before {
+    content: '✉';
+    position: absolute;
+}
+
+.whatsapp-icone {
+    background: linear-gradient(45deg, #25d366, #128c7e);
+    position: relative;
+}
+
+.whatsapp-icone::before {
+    content: '✆';
+    position: absolute;
+}
+
+.linkedin-icone {
+    background: linear-gradient(45deg, #0077b5, #0a66c2);
+    position: relative;
+}
+
+.linkedin-icone::before {
+    content: 'in';
+    position: relative;
+}
+
+.github-icone {
+    background: linear-gradient(45deg, #333, #24292e);
+    position: relative;
+}
+
+.github-icone::before {
+    content: '★';
+    position: absolute;
+}
+
+.contato-card h3 {
+    margin-bottom: 10px;
+}
+
+.contato-card p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Botões */
+.botao {
+    display: inline-block;
+    background: linear-gradient(45deg, var(--cor-primaria), var(--cor-secundaria));
+    color: var(--cor-clara);
+    padding: 10px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transicao);
+    border: none;
+    cursor: pointer;
+}
+
+.botao:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Rodapé */
+footer {
+    background: linear-gradient(45deg, var(--cor-escura), #333);
+    color: var(--cor-clara);
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 80px;
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cor-clara), transparent);
+    opacity: 0.1;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+    nav ul {
+        gap: 15px;
+    }
+    
+    nav li {
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px;
+    }
+    
+    header {
+        padding: 0.8rem 0;
+    }
+    
+    .menu-btn {
+        display: block;
+    }
+    
+    nav {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 250px;
+        height: 100vh;
+        background-color: var(--cor-escura);
+        flex-direction: column;
+        justify-content: center;
+        padding: 80px 0;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+    
+    nav li {
+        margin: 10px 0;
+        width: 100%;
+    }
+    
+    nav a {
+        display: block;
+        padding: 10px 0;
+    }
+    
+    /* Quando o checkbox está marcado, mostra o menu deslizando da direita */
+    #menu-toggle:checked ~ nav {
+        right: 0;
+    }
+    
+    /* Animação do botão mobile */
+    #menu-toggle:checked ~ .menu-btn span {
+        background-color: transparent;
+    }
+    
+    #menu-toggle:checked ~ .menu-btn span::before {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    #menu-toggle:checked ~ .menu-btn span::after {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+    
+    .hero {
+        padding: 100px 0 60px;
+        margin-top: 0;
+    }
+    
+    .perfil-container {
+        width: 150px;
+        height: 150px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.7rem;
+    }
+    
+    .conteudo {
+        padding: 80px 0 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    .perfil-container {
+        width: 120px;
+        height: 120px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero {
+        padding: 80px 0 50px;
+    }
+}
+
+/* Estilos para a seção Sobre Mim */
+.intro-text {
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.7;
+}
+
+.highlight {
+    color: var(--cor-primaria);
+    font-weight: 500;
+}
+
+.skills-list {
+    margin: 1rem 0 1.5rem 1.5rem;
+    line-height: 1.6;
+}
+
+.skills-list li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.skills-list li::before {
+    content: '•';
+    color: var(--cor-primaria);
+    font-weight: bold;
+    position: absolute;
+    left: -1rem;
+}
+
+.personal-traits {
+    margin-top: 1.5rem;
+    border-left: 3px solid var(--cor-secundaria);
+    padding-left: 1rem;
+    font-style: italic;
+    color: #555;
+}
